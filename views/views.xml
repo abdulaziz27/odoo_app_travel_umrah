@@ -1,0 +1,356 @@
+<odoo>
+  <data>
+    <!-- Menambahkan field pada view form partner -->
+     
+    <record model="ir.ui.view" id="travel_form_view">
+        <field name="name">res.partner.travelumroh</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet/group" position="after">
+                    <group string="Additional Information">
+                        <group>
+                            <field name="noktp"/>
+                            <field name="gender"/>
+                            <field name="dadname"/>
+                            <field name="momname"/>
+                            <field name="job"/>
+                        </group>
+                        <group>
+                            <field name="plbirth"/>
+                            <field name="dtbirth"/>
+                            <field name="bloodtype"/>
+                            <field name="maritalstatus"/>
+                            <field name="education"/>
+                        </group>
+                    </group>
+            </xpath> 
+
+
+
+        </field>
+    </record>
+
+    <!-- Menambahkan field pada view form Stock  -->
+     
+    <record model="ir.ui.view" id="stock_form_view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <button name="button_suratjalan" type="object" string="Print Surat Jalan"/>
+            </xpath> 
+
+
+
+        </field>
+    </record>
+
+    <!-- account.invoice.form form view -->
+    <record id="account_invoice_view_form" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="button_invoice" type="object" string="Print Invoice"/>
+            </xpath> 
+        </field>
+    </record>
+
+    <!-- Menambahkan field pada view form partner -->
+     
+    <record model="ir.ui.view" id="saleorder_form_view">
+        <field name="name">sale.order.saleorder</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="sale_order_template_id" position="after">
+                <field name="travelpackage" />
+            </field>
+            <notebook>
+                <page string="Manifest" >
+                    <field name="saleorderlines">
+                        <tree string="Manifest">
+                            <field name="title_id"/>
+                            <field name="gender"/>
+                            <field name="passportname"/>
+                            <field name="passportno"/>
+                            <field name="ktpno"/>
+                            <field name="birthdate"/>
+                            <field name="birthplace"/>
+                            <field name="dateissued"/>
+                            <field name="dateexpiry"/>
+                            <field name="imigration"/>
+                            <field name="age"/>
+                            <field name="roomtype"/>
+                            <field name="mahram_id"/>
+                        </tree>
+                        <form>
+                            <group string="Personal">
+                                <group> 
+                                    <field name="jamaah_id"/>
+                                </group>
+                                <group>
+                                    <field name="title_id"/>
+                                </group>
+                                <group>
+                                    <field name="ktpno"/>
+                                </group>
+                                <group>
+                                    <field name="birthdate"/>
+                                </group>
+                                <group>
+                                    <field name="birthplace"/>
+                                </group>
+                                <group>
+                                    <field name="age"/>
+                                </group>
+                                <group>
+                                    <field name="roomtype"/>
+                                </group>
+                                <group>
+                                    <field name="mahram_id"/>
+                                </group>
+                            </group>
+                            <group string="Passport">
+                                <group>
+                                    <field name="passportno"/>
+                                </group>
+                                <group>
+                                    <field name="passportname"/>
+                                </group>
+                                <group>
+                                    <field name="dateissued"/>
+                                </group>
+                                <group>
+                                    <field name="dateexpiry"/>
+                                </group>
+                                <group>
+                                    <field name="imigration"/>
+                                </group>
+                                <!-- <group>
+                                    <field name="note"/>
+                                </group> -->
+                                <group>
+                                    <field name="foto"/>
+                                </group>
+                            </group>
+                            </form>
+                        
+                    </field> 
+                </page>
+                <page string="Document Lines">
+                    <field name="doclines">
+                        <tree string="Document Lines" >
+                            <field name="name"/>
+                            <field name="foto"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name"/>
+                                <field name="foto"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    
+
+
+    <!-- ### Membuat Tampilan Tree/List Sesi ### -->
+ 
+    <record model="ir.ui.view" id="travelpackage_tree_view">
+        <field name="name">travel.package.tree</field>
+        <field name="model">travel.package</field>
+        <field name="arch" type="xml">
+            <tree string="Sesi List">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="departuredate"/>
+                <field name="returndate"/>
+                <field name="quota"/>
+                <field name="quotaprogress"/>
+                <field name="totalcost"/>
+                <field name="state"/>  
+            </tree>
+        </field>
+    </record>
+    
+
+    <!-- ### Membuat Tampilan Form Travel Package ### -->
+        
+    <record model="ir.ui.view" id="travelpackage_form_view">
+        <field name="name">travel.package.form</field>
+        <field name="model">travel.package</field>
+        <field name="arch" type="xml">
+            <form string="Sesi Form">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" states="draft" class="btn-primary"/>
+                    <button name="action_cancel" type="object" string="Set to draft" states="open"/>
+                    <button name="action_close" type="object" string="Done" states="open" class="btn-primary"/>
+                    <button name="action_updatejamaah" type="object" string="Update Jamaah" states="open" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,done"/>
+                    <button name="print_manifest" type="object" string="Generate Ke excel"/>
+                </header>
+                <sheet>
+                  <group string="Informations">
+                    <group>
+                      <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="departuredate"/>
+                    </group>
+                    <group>
+                        <field name="returndate"/>
+                    </group>
+                  </group>
+                  <group string="Product">
+                    <group>
+                        <field name="product_id"/>
+                    </group>
+                    <group>
+                        <field name="package_id"/>
+                    </group>
+                  </group>
+                  <group string="Seats">
+                    <group>
+                        <field name="quota"/>
+                        <field name="seats"/>
+                    </group>
+                    <group>
+                        <field name="quotaprogress" widget="progressbar"/>  
+                    </group>
+                  </group> 
+                  <group string="Commisssions">
+                    <group>
+                        <field name="amount"/>
+                    </group>
+                    <group>
+                        <field name="product2_id"/>
+                    </group>
+                  </group>
+                  <notebook>
+                     <page string="Hotel Lines" >
+                        <field name="hotellines">
+                            <tree string="Hotel" editable="bottom">
+                                <field name="hotel_id"/>
+                                <field name="startdate"/>
+                                <field name="enddate"/>
+                                <field name="city"/>
+                            </tree>
+                        </field>
+                     </page>
+                     <page string="Airline Lines">
+                        <field name="airlinelines">
+                            <tree string="Airline" editable="bottom">
+                                <field name="airlines_id"/>
+                                <field name="departuredate"/>
+                                <field name="departurecity"/>
+                                <field name="arrivalcity"/>
+                            </tree>
+                        </field>
+                     </page>
+                     <page string="Schedule Lines">
+                        <field name="schedulelines">
+                            <tree string="Schedule" editable="bottom">
+                                <field name="schedule_id"/>
+                                <field name="date"/>
+                            </tree>
+                        </field> 
+                     </page>
+                     <page string="Manifest" >
+                        <field name="manifestlines">
+                            <tree string="Manifest_id">
+                                <field name="title_id"/>
+                                <field name="gender"/>
+                                <field name="passportname"/>
+                                <field name="passportno"/>
+                                <field name="ktpno"/>
+                                <field name="birthdate"/>
+                                <field name="birthplace"/>
+                                <field name="dateissued"/>
+                                <field name="dateexpiry"/>
+                                <field name="imigration"/>
+                                <field name="age"/>
+                                <field name="roomtype"/>
+                                <field name="mahram_id"/>
+                                <field name="agent"/>
+                            </tree>
+                        </field> 
+                     </page>
+                     <page string="HPP Lines" >
+                        <field name="hpplines">
+                            <tree string="HPP Lines" editable="bottom">
+                                <field name="producthpp_id"/>
+                                <field name="quantity"/>
+                                <field name="uom_id"/>
+                                <field name="unitprice"/>
+                                <field name="subtotal"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="total_cost"/>
+                            </div>
+                            <field name="total_cost" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                     </page>
+                     <page string="Commission Lines" >
+                        <field name="commissionlines">
+                            <tree string="Commission Lines">
+                                <field name="vendor"/>
+                                <field name="billdate"/>
+                                <field name="number"/>
+                                <field name="vendorreference"/>
+                                <field name="duedate"/>
+                                <field name="sourcedocument"/>
+                                <field name="total"/>
+                                <field name="topay"/>
+                                <field name="status"/>
+                            </tree>
+                        </field> 
+                     </page>
+                     
+                    <field name="note" class="oe_inline" placeholder="Terms and conditions... (note: you can setup default ones in the Configuration menu)"/>
+                    <div class="oe_clear"/>
+                  </notebook>
+                </sheet>                          
+            </form>
+        </field>
+    </record>
+    
+    <!-- Sequence -->
+ 
+    <record id="travel_package_sequence" model="ir.sequence">
+        <field name="name">travel Package</field>
+        <field name="code">travel.package</field>
+        <field name="prefix">TP/%(month)s/%(y)s/</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- ### Membuat Menu Bar ### -->
+    <menuitem id="main_travelumroh_menu" name="Travel Umroh" web_icon="travelumroh, static/description/icon.png"/>
+
+
+     <!-- Membuat Action/Event Object Sesi  -->
+ 
+    <record model="ir.actions.act_window" id="travelpackage_list_action">
+        <field name="name">Travel Package</field>
+        <field name="res_model">travel.package</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+ 
+
+    <!-- Menu item travel package  -->
+   <menuitem  name="Travel Package" id="idbaru" parent="sale.sale_menu_root" action="travelpackage_list_action"/> 
+ 
+
+  </data>
+</odoo>

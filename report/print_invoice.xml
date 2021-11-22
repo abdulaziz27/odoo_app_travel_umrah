@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     
+     
+<template id="print_invoice">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                     <!-- JUDUL REPORT-->
+                     
+                    <h2 class="text-center">Customer Invoice</h2>
+         
+                    <!-- INFORMASI HEADER -->
+
+                    
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><strong>Customer</strong></td>
+                            <td><span t-field="o.partner_id.name"/></td>
+                            <td><strong>No</strong></td>
+                            <td><span t-field="o.name"/></td>
+                        </tr>
+                            <td><strong>Phone</strong></td>
+                            <td><span t-field="o.partner_id.mobile"/></td>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong></td>
+                            <td><span t-field="o.partner_id.street"/></td>
+                            <td><strong>Date</strong></td>
+                            <td><span t-field="o.date_invoice"/></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="table-layout:auto">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Product</th>
+                                <th class="text-center">Qty(UoM)</th>
+                                <th class="text-center">Price Unit</th>
+                                <th class="text-center">Subtotal</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <t t-foreach="o.invoice_line_ids" t-as="l">
+                                <tr>
+                                    <td><span t-field="l.product_id.name"/></td>
+                                    <td><span t-field="l.quantity"/>  <span t-field="l.uom_id.name"/></td>
+                                    <td><span t-field="l.price_unit"/></td>
+                                    <td><span t-field="l.price_subtotal"/></td>
+                                </tr>
+                            </t>
+                                <tr>
+                                    <td colspan="3" class="text-right"><span>Total</span></td>
+                                    <td><span t-field="o.amount_total"/></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" style="table-layout:auto">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="text-left"><span>Payment</span></th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Method</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Amount</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <t t-foreach="o.payment_ids" t-as="p">
+                                <tr>
+                                    <td class="text-center"><span t-field="p.journal_id.name"/></td>
+                                    <td class="text-center"><span t-field="p.payment_date"/></td>
+                                    <td class="text-center"><span t-field="p.amount"/></td>
+                                </tr>
+                            </t>
+                                <tr>
+                                    <td colspan="2" class="text-right"><span>Sisa</span></td>
+                                    <td class="text-center"><span t-field="o.residual"/></td>
+                                </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- <table class="table table-bordered" style="table-layout:auto">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Finance</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <tr>
+                                <td class="height "></td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                    
+                </div>
+            </t>
+        </t>
+    </t>
+    
+
+</template>
+ 
+</odoo>
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report
+        id="button_suratjalan"
+        string="Report QWEB"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        file="travelumroh.print_deliveryorder"
+        name="travelumroh.print_deliveryorder"
+        />
+
+        <report
+        id="button_invoice"
+        string="Report QWEB"
+        model="account.invoice"
+        report_type="qweb-pdf"
+        file="travelumroh.print_invoice"
+        name="travelumroh.print_invoice"
+        />
+    </data>
+</odoo>

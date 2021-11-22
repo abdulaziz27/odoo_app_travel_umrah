@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_package,access.travel.package,model_travel_package,,1,1,1,1
+access_hotel_lines,access.hotel.lines,model_hotel_lines,,1,1,1,1
+access_airline_lines,access.airline.lines,model_airline_lines,,1,1,1,1
+access_schedule_lines,access.schedule.lines,model_schedule_lines,,1,1,1,1
+access_travel_manifest,access.travel.manifest,model_travel_manifest,,1,1,1,1
+access_hpp_lines,access.hpp.lines,model_hpp_lines,,1,1,1,1
+access_commission_lines,access.commission.lines,model_commission_lines,,1,1,1,1
+access_document_lines,access.document.lines,model_document_lines,,1,1,1,1
